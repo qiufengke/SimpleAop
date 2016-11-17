@@ -1,0 +1,8 @@
+c:\users\wangs\documents\visual studio 2015\Projects\SimpleAop\AopTest\bin\Debug\AopTest.exe.config
+c:\users\wangs\documents\visual studio 2015\Projects\SimpleAop\AopTest\bin\Debug\AopTest.exe
+c:\users\wangs\documents\visual studio 2015\Projects\SimpleAop\AopTest\bin\Debug\AopTest.pdb
+c:\users\wangs\documents\visual studio 2015\Projects\SimpleAop\AopTest\bin\Debug\SimpleAop.dll
+c:\users\wangs\documents\visual studio 2015\Projects\SimpleAop\AopTest\bin\Debug\SimpleAop.pdb
+c:\users\wangs\documents\visual studio 2015\Projects\SimpleAop\AopTest\obj\Debug\AopTest.csprojResolveAssemblyReference.cache
+c:\users\wangs\documents\visual studio 2015\Projects\SimpleAop\AopTest\obj\Debug\AopTest.exe
+c:\users\wangs\documents\visual studio 2015\Projects\SimpleAop\AopTest\obj\Debug\AopTest.pdb

@@ -63,7 +63,7 @@ namespace SimpleAop.Proxy
                     // 问题1：使用 methodReturnMessage = RemotingServices.ExecuteMessage(_target, methodCallMessage) 方法 不能捕获异常
 
                     Exception methodException = null;
-                    methodReturnMessage = ExcuteWithLog(methodCallMessage, ref methodException);
+                    methodReturnMessage = ExecuteWithLog(methodCallMessage, ref methodException);
 
                     if (methodException != null)
                     {
@@ -87,7 +87,7 @@ namespace SimpleAop.Proxy
         /// <param name="methodCallMessage"></param>
         /// <param name="methodException"></param>
         /// <returns></returns>
-        private IMethodReturnMessage ExcuteWithLog(IMethodCallMessage methodCallMessage, ref Exception methodException)
+        private IMethodReturnMessage ExecuteWithLog(IMethodCallMessage methodCallMessage, ref Exception methodException)
         {
             IMethodReturnMessage methodReturnMessage;
             try
