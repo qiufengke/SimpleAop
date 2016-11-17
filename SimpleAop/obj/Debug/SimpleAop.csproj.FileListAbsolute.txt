@@ -1,5 +1,4 @@
-c:\users\wangs\documents\visual studio 2015\Projects\SimpleAop\SimpleAop\bin\Debug\SimpleAop.exe.config
-c:\users\wangs\documents\visual studio 2015\Projects\SimpleAop\SimpleAop\bin\Debug\SimpleAop.exe
+c:\users\wangs\documents\visual studio 2015\Projects\SimpleAop\SimpleAop\bin\Debug\SimpleAop.dll
 c:\users\wangs\documents\visual studio 2015\Projects\SimpleAop\SimpleAop\bin\Debug\SimpleAop.pdb
-c:\users\wangs\documents\visual studio 2015\Projects\SimpleAop\SimpleAop\obj\Debug\SimpleAop.exe
+c:\users\wangs\documents\visual studio 2015\Projects\SimpleAop\SimpleAop\obj\Debug\SimpleAop.dll
 c:\users\wangs\documents\visual studio 2015\Projects\SimpleAop\SimpleAop\obj\Debug\SimpleAop.pdb
