@@ -1,24 +1,27 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using SimpleAop.Interface;
 
 namespace SimpleAop.Core
 {
+    [Serializable]
     public class MethodInvocation : IMethodInvocation
     {
-        protected object[] arguments;
-        protected MethodInfo methodInfo;
-        protected object target;
-
-        public MethodInvocation(MethodInfo _methodInfo, object _target, object[] _args)
+        public MethodInvocation(MethodInfo methodInfo, object target, object[] args)
         {
-            methodInfo = _methodInfo;
-            target = _target;
-            arguments = _args;
+            MethodInfo = methodInfo;
+            Target = target;
+            Arguments = args;
         }
+
+        public object[] Arguments { get; }
+        public MethodInfo MethodInfo { get; }
+        public object Target { get; }
 
         public object Proceed()
         {
-            return methodInfo.Invoke(target, arguments);
+            IDynamicMethod targetMethod = new SafeDynamicMethod(MethodInfo);
+            return targetMethod.Invoke(Target, Arguments);
         }
     }
 }

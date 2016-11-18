@@ -4,6 +4,7 @@ using SimpleAop.Interface;
 
 namespace SimpleAop.Interception
 {
+    [Serializable]
     public class AopInterception : IInterception
     {
         public void PreInvoke(MethodInfo method, object[] args, object target)
@@ -20,7 +21,10 @@ namespace SimpleAop.Interception
 
         public object ArroundInvoke(IMethodInvocation methodInvocation)
         {
-            return methodInvocation.Proceed();
+            Console.WriteLine("ArroundInvoke 拦截器");
+            var result = methodInvocation.Proceed();
+            Console.WriteLine("ArroundInvoke 拦截器调用结束");
+            return result;
         }
 
         public void ExceptionHandle(MethodInfo method, object[] args, object target, Exception ex)

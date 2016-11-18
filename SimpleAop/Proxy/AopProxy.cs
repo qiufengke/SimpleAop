@@ -60,24 +60,26 @@ namespace SimpleAop.Proxy
             var methodCallMessage = msg as IMethodCallMessage;
             if (methodCallMessage != null)
             {
+                var methodInfo = (MethodInfo)methodCallMessage.MethodBase;
+
                 if (_enablePreInterception)
-                    _interception.PreInvoke((MethodInfo)methodCallMessage.MethodBase, methodCallMessage.Args,
+                    _interception.PreInvoke(methodInfo, methodCallMessage.Args,
                         _target);
 
                 // 问题1：使用 methodReturnMessage = RemotingServices.ExecuteMessage(_target, methodCallMessage) 方法 不能捕获异常
 
                 Exception methodException = null;
-                methodReturnMessage = ExecuteWithLog(methodCallMessage, ref methodException);
+                methodReturnMessage = SafeExecute(methodCallMessage, ref methodException);
 
                 if (methodException != null)
                 {
-                    _interception.ExceptionHandle((MethodInfo)methodCallMessage.MethodBase, methodCallMessage.Args,
+                    _interception.ExceptionHandle(methodInfo, methodCallMessage.Args,
                         _target, methodException);
                 }
 
                 if (_enableAfterInterception)
                 {
-                    _interception.AfterInvoke((MethodInfo)methodCallMessage.MethodBase, methodCallMessage.Args,
+                    _interception.AfterInvoke(methodInfo, methodCallMessage.Args,
                         _target);
                 }
             }
@@ -85,21 +87,24 @@ namespace SimpleAop.Proxy
         }
 
         /// <summary>
-        /// 执行方法抛出异常时记录异常
+        /// 
         /// </summary>
         /// <param name="methodCallMessage"></param>
         /// <param name="methodException"></param>
         /// <returns></returns>
-        private IMethodReturnMessage ExecuteWithLog(IMethodCallMessage methodCallMessage, ref Exception methodException)
+        private IMethodReturnMessage SafeExecute(IMethodCallMessage methodCallMessage, ref Exception methodException)
         {
             IMethodReturnMessage methodReturnMessage;
+            var methodInfo = (MethodInfo)methodCallMessage.MethodBase;
             try
             {
                 object returnValue = null;
 
+                IMethodInvocation methodInvocation = new MethodInvocation(methodInfo, _target, methodCallMessage.Args);
+
                 returnValue = _enableArroundInterception
-                    ? _interception.ArroundInvoke(new MethodInvocation((MethodInfo)methodCallMessage.MethodBase, _target, methodCallMessage.Args))
-                    : methodCallMessage.MethodBase.Invoke(_target, methodCallMessage.Args);
+                    ? _interception.ArroundInvoke(methodInvocation)
+                    : methodInvocation.Proceed();
 
                 methodReturnMessage = new ReturnMessage(returnValue, null, 0, methodCallMessage.LogicalCallContext,
                     methodCallMessage);
@@ -107,9 +112,9 @@ namespace SimpleAop.Proxy
             catch (Exception ex)
             {
                 //methodReturnMessage = new ReturnMessage(ex.InnerException, methodCallMessage);
-                methodReturnMessage = new ReturnMessage(null, null, 0, methodCallMessage.LogicalCallContext,
-                    methodCallMessage);
-                methodException = ex.InnerException;
+
+                methodReturnMessage = new ReturnMessage(null, null, 0, methodCallMessage.LogicalCallContext, methodCallMessage);
+                methodException = ex.InnerException ?? ex;
             }
             return methodReturnMessage;
         }

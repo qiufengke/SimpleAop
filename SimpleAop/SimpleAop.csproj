@@ -47,7 +47,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attribute\AopProxyAttribute.cs" />
+    <Compile Include="Core\SafeDynamicMethod.cs" />
+    <Compile Include="Core\DynamicReflectionManager.cs" />
     <Compile Include="Core\MethodInvocation.cs" />
+    <Compile Include="Interface\IDynamicMethod.cs" />
     <Compile Include="Interface\IInterception.cs" />
     <Compile Include="Interception\AopInterception.cs" />
     <Compile Include="Interface\IMethodInvocation.cs" />
@@ -55,7 +58,9 @@
     <Compile Include="Proxy\AopProxy.cs" />
     <Compile Include="Proxy\ProxyFactory.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Util\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

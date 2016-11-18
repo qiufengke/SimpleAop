@@ -6,13 +6,21 @@ using SimpleAop.Proxy;
 namespace SimpleAop.Attribute
 {
     [AttributeUsage(AttributeTargets.Class)]
+    [Serializable]
     public class AopProxyAttribute : ProxyAttribute
     {
         private readonly bool _enableAfterInterception; // 是否启用方法执行后拦截
-        private readonly bool _enablePreInterception; // 是否启用方法执行前拦截
         private readonly bool _enableArroundInterception;
+        private readonly bool _enablePreInterception; // 是否启用方法执行前拦截
         private IInterception _interception;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="interceptionType">拦截器类型</param>
+        /// <param name="enablePreInterception">是否启用方法执行后拦截</param>
+        /// <param name="enableAfterInterception">是否启用方法执行后拦截</param>
+        /// <param name="enableAroundInterception">是否启用 around 拦截</param>
         public AopProxyAttribute(Type interceptionType, bool enablePreInterception = false,
             bool enableAfterInterception = false, bool enableAroundInterception = false)
         {
@@ -36,7 +44,8 @@ namespace SimpleAop.Attribute
         {
             var target = base.CreateInstance(serverType);
             var aopRealProxy = new AopProxy(serverType, target);
-            aopRealProxy.InjectInterception(_interception, _enablePreInterception, _enableAfterInterception, _enableArroundInterception);
+            aopRealProxy.InjectInterception(_interception, _enablePreInterception, _enableAfterInterception,
+                _enableArroundInterception);
             return aopRealProxy.GetTransparentProxy() as MarshalByRefObject;
         }
     }
