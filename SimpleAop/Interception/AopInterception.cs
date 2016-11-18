@@ -4,7 +4,6 @@ using SimpleAop.Interface;
 
 namespace SimpleAop.Interception
 {
-    [Serializable]
     public class AopInterception : IInterception
     {
         public void PreInvoke(MethodInfo method, object[] args, object target)
@@ -30,7 +29,7 @@ namespace SimpleAop.Interception
         public void ExceptionHandle(MethodInfo method, object[] args, object target, Exception ex)
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($"抛出异常:{ex.ToString()}");
+            Console.WriteLine($"抛出异常:{ex}");
         }
     }
 }

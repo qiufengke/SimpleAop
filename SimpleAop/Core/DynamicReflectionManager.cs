@@ -8,6 +8,7 @@ using System.Security.Permissions;
 
 namespace SimpleAop.Core
 {
+    [Serializable]
     internal class DynamicReflectionManager
     {
         private static readonly OpCode[] LdArgOpCodes = { OpCodes.Ldarg_0, OpCodes.Ldarg_1, OpCodes.Ldarg_2 };
@@ -17,6 +18,53 @@ namespace SimpleAop.Core
 
         private static readonly MethodInfo FnConvertArgumentIfNecessary =
             new ChangeTypeDelegate(ConvertValueTypeArgumentIfNecessary).Method;
+
+        public static object ConvertValueTypeArgumentIfNecessary(object value, Type targetType, int argIndex)
+        {
+            if (value == null)
+            {
+                //if (ReflectionUtils.IsNullableType(targetType))
+                //{
+                //    return null;
+                //}
+                throw new InvalidCastException(string.Format(
+                    "Cannot convert NULL at position {0} to argument type {1}", argIndex, targetType.FullName));
+            }
+
+            var valueType = value.GetType();
+#if NET_2_0
+            if (ReflectionUtils.IsNullableType(targetType))
+            {
+                targetType = Nullable.GetUnderlyingType(targetType);
+            }
+#endif
+            // no conversion necessary?
+            if (valueType == targetType)
+            {
+                return value;
+            }
+
+            if (!valueType.IsValueType)
+            {
+                // we're facing a reftype/valuetype mix that never can convert
+                throw new InvalidCastException(
+                    string.Format("Cannot convert value '{0}' of type {1} at position {2} to argument type {3}", value,
+                        valueType.FullName, argIndex, targetType.FullName));
+            }
+
+            // we're dealing only with ValueType's now - try to convert them
+            try
+            {
+                // TODO: allow widening conversions only
+                return Convert.ChangeType(value, targetType);
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidCastException(
+                    string.Format("Cannot convert value '{0}' of type {1} at position {2} to argument type {3}", value,
+                        valueType.FullName, argIndex, targetType.FullName), ex);
+            }
+        }
 
         public static SafeDynamicMethod.FunctionDelegate CreateMethod(MethodInfo methodInfo)
         {
@@ -174,53 +222,6 @@ namespace SimpleAop.Core
             il.Emit(OpCodes.Unbox, argumentType);
             il.Emit(OpCodes.Ldobj, argumentType);
 #endif
-        }
-
-        public static object ConvertValueTypeArgumentIfNecessary(object value, Type targetType, int argIndex)
-        {
-            if (value == null)
-            {
-                //if (ReflectionUtils.IsNullableType(targetType))
-                //{
-                //    return null;
-                //}
-                throw new InvalidCastException(string.Format(
-                    "Cannot convert NULL at position {0} to argument type {1}", argIndex, targetType.FullName));
-            }
-
-            var valueType = value.GetType();
-#if NET_2_0
-            if (ReflectionUtils.IsNullableType(targetType))
-            {
-                targetType = Nullable.GetUnderlyingType(targetType);
-            }
-#endif
-            // no conversion necessary?
-            if (valueType == targetType)
-            {
-                return value;
-            }
-
-            if (!valueType.IsValueType)
-            {
-                // we're facing a reftype/valuetype mix that never can convert
-                throw new InvalidCastException(
-                    string.Format("Cannot convert value '{0}' of type {1} at position {2} to argument type {3}", value,
-                        valueType.FullName, argIndex, targetType.FullName));
-            }
-
-            // we're dealing only with ValueType's now - try to convert them
-            try
-            {
-                // TODO: allow widening conversions only
-                return Convert.ChangeType(value, targetType);
-            }
-            catch (Exception ex)
-            {
-                throw new InvalidCastException(
-                    string.Format("Cannot convert value '{0}' of type {1} at position {2} to argument type {3}", value,
-                        valueType.FullName, argIndex, targetType.FullName), ex);
-            }
         }
 
         private static void EmitTarget(ILGenerator il, Type targetType, bool isInstanceMethod)

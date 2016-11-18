@@ -15,7 +15,7 @@ namespace SimpleAop.Attribute
         private IInterception _interception;
 
         /// <summary>
-        /// 
+        /// 构造拦截器类型
         /// </summary>
         /// <param name="interceptionType">拦截器类型</param>
         /// <param name="enablePreInterception">是否启用方法执行后拦截</param>

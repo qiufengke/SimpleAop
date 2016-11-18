@@ -19,8 +19,7 @@ namespace SimpleAop.Core
             if (state == null)
             {
                 state = new SafeMethodState(DynamicReflectionManager.CreateMethod(methodInfo),
-                    new object[methodInfo.GetParameters().Length]
-                    );
+                    new object[methodInfo.GetParameters().Length]);
                 stateCache[methodInfo] = state;
             }
             this.methodInfo = methodInfo;

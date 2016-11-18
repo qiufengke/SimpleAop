@@ -102,9 +102,10 @@ namespace SimpleAop.Proxy
 
                 IMethodInvocation methodInvocation = new MethodInvocation(methodInfo, _target, methodCallMessage.Args);
 
-                returnValue = _enableArroundInterception
-                    ? _interception.ArroundInvoke(methodInvocation)
-                    : methodInvocation.Proceed();
+                returnValue =
+                    _enableArroundInterception
+                        ? _interception.ArroundInvoke(methodInvocation)
+                        : methodInvocation.Proceed();
 
                 methodReturnMessage = new ReturnMessage(returnValue, null, 0, methodCallMessage.LogicalCallContext,
                     methodCallMessage);
@@ -113,7 +114,8 @@ namespace SimpleAop.Proxy
             {
                 //methodReturnMessage = new ReturnMessage(ex.InnerException, methodCallMessage);
 
-                methodReturnMessage = new ReturnMessage(null, null, 0, methodCallMessage.LogicalCallContext, methodCallMessage);
+                methodReturnMessage = new ReturnMessage(null, null, 0, methodCallMessage.LogicalCallContext,
+                    methodCallMessage);
                 methodException = ex.InnerException ?? ex;
             }
             return methodReturnMessage;

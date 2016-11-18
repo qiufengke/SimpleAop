@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SimpleAop.Interface
 {
@@ -18,7 +14,7 @@ namespace SimpleAop.Interface
         void PreInvoke(MethodInfo method, object[] args, object target);
 
         /// <summary>
-        /// execute the method invoke.
+        /// execute after the method invoke.
         /// </summary>
         /// <param name="method"></param>
         /// <param name="args"></param>
@@ -26,7 +22,7 @@ namespace SimpleAop.Interface
         void AfterInvoke(MethodInfo method, object[] args, object target);
 
         /// <summary>
-        /// around the method invoke.
+        /// around the method invoke. need Manual call the method methodInvocation.Proceed()
         /// </summary>
         /// <param name="methodInvocation"></param>
         /// <returns></returns>
