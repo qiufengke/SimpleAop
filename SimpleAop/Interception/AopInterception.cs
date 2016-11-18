@@ -18,6 +18,11 @@ namespace SimpleAop.Interception
             Console.WriteLine("方法调用之后");
         }
 
+        public object ArroundInvoke(IMethodInvocation methodInvocation)
+        {
+            return methodInvocation.Proceed();
+        }
+
         public void ExceptionHandle(MethodInfo method, object[] args, object target, Exception ex)
         {
             Console.ForegroundColor = ConsoleColor.Red;
