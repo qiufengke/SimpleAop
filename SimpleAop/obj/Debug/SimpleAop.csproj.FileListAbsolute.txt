@@ -2,3 +2,4 @@ c:\users\wangs\documents\visual studio 2015\Projects\SimpleAop\SimpleAop\bin\Deb
 c:\users\wangs\documents\visual studio 2015\Projects\SimpleAop\SimpleAop\bin\Debug\SimpleAop.pdb
 c:\users\wangs\documents\visual studio 2015\Projects\SimpleAop\SimpleAop\obj\Debug\SimpleAop.dll
 c:\users\wangs\documents\visual studio 2015\Projects\SimpleAop\SimpleAop\obj\Debug\SimpleAop.pdb
+C:\Users\wangs\Documents\Visual Studio 2015\Projects\SimpleAop\SimpleAop\obj\Debug\SimpleAop.csprojResolveAssemblyReference.cache

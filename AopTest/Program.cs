@@ -52,7 +52,7 @@ namespace AopTest
         }
     }
 
-    [AopLogProxy(typeof(LogInterception), true, true)]
+    [AopProxy(typeof(AopInterception), true, true)]
     public abstract class BaseAop : ContextBoundObject
     {
     }

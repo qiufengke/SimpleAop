@@ -4,7 +4,7 @@ using SimpleAop.Interface;
 
 namespace SimpleAop.Interception
 {
-    public class LogInterception : IInterception
+    public class AopInterception : IInterception
     {
         public void PreInvoke(MethodInfo method, object[] args, object target)
         {

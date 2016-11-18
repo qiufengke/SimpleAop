@@ -6,13 +6,13 @@ using SimpleAop.Proxy;
 namespace SimpleAop.Attribute
 {
     [AttributeUsage(AttributeTargets.Class)]
-    public class AopLogProxyAttribute : ProxyAttribute
+    public class AopProxyAttribute : ProxyAttribute
     {
         private readonly bool _enableAfterInterception; // 是否启用方法执行后拦截
         private readonly bool _enablePreInterception; // 是否启用方法执行前拦截
         private IInterception _interception;
 
-        public AopLogProxyAttribute(Type interceptionType, bool enablePreInterception = false,
+        public AopProxyAttribute(Type interceptionType, bool enablePreInterception = false,
             bool enableAfterInterception = false)
         {
             Interception = interceptionType;
