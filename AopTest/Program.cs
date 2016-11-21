@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using AopTest.Interception;
 using SimpleAop.Attribute;
+using SimpleAop.Extension;
 
 namespace AopTest
 {
@@ -8,15 +10,21 @@ namespace AopTest
     {
         private static void Main(string[] args)
         {
+            Console.WriteLine($"int? 的 默认值：{typeof(int?).GetDefault() ?? "null"}");
+            Console.WriteLine($"bool 的 默认值：{typeof(bool).GetDefault() ?? "null"}");
+            Console.WriteLine($"string 的 默认值：{typeof(string).GetDefault() ?? "null"}");
+            Console.WriteLine($"TestAop 的 默认值：{typeof(TestAop).GetDefault() ?? "null"}");
+            Console.WriteLine($"Enum 的 默认值：{typeof(Enum).GetDefault() ?? "null"}");
+            Console.WriteLine($"List<int> 的 默认值：{typeof(List<int>).GetDefault() ?? "null"}");
+            Console.WriteLine($"List<string> 的 默认值：{typeof(List<string>).GetDefault() ?? "null"}");
+
             #region Attribute 方式
 
-            var t = new TestAop();
+            //var t = new TestAop();
 
-            t.Excute();
+            //t.Excute();
 
-            Console.WriteLine(" end.");
-
-            //Console.WriteLine($"返回值：{result}");
+            //Console.WriteLine(" end.");
 
             #endregion
 
