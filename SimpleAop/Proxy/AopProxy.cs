@@ -6,6 +6,7 @@ using System.Runtime.Remoting.Messaging;
 using System.Runtime.Remoting.Proxies;
 using System.Runtime.Remoting.Services;
 using SimpleAop.Core;
+using SimpleAop.Extension;
 using SimpleAop.Interface;
 
 namespace SimpleAop.Proxy
@@ -114,7 +115,9 @@ namespace SimpleAop.Proxy
             {
                 //methodReturnMessage = new ReturnMessage(ex.InnerException, methodCallMessage);
 
-                methodReturnMessage = new ReturnMessage(null, null, 0, methodCallMessage.LogicalCallContext,
+                var defaultV = methodInfo.ReturnType.GetDefault();
+
+                methodReturnMessage = new ReturnMessage(defaultV, null, 0, methodCallMessage.LogicalCallContext,
                     methodCallMessage);
                 methodException = ex.InnerException ?? ex;
             }

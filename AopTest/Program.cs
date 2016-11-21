@@ -12,7 +12,7 @@ namespace AopTest
 
             var t = new TestAop();
 
-            var r = t.Excute();
+            t.Excute();
 
             Console.WriteLine(" end.");
 
@@ -36,12 +36,11 @@ namespace AopTest
 
     public class TestAop : BaseAop
     {
-        public bool Excute()
+        public void Excute()
         {
             Console.WriteLine(" execute method.");
             throw new Exception("66666666");
             Console.WriteLine(" end method.");
-            return true;
             //try
             //{
             //    Console.WriteLine(" execute method.");

@@ -30,6 +30,7 @@ namespace AopTest.Interception
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine($"抛出异常:{ex}");
+            Console.ForegroundColor = ConsoleColor.White;
         }
     }
 }
