@@ -1,24 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using AopTest.Interception;
 using SimpleAop.Attribute;
-using SimpleAop.Interception;
 
 namespace AopTest
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             #region Attribute 方式
 
-            TestAop t = new TestAop();
+            var t = new TestAop();
 
             var r = t.Excute();
+
             Console.WriteLine(" end.");
+
             //Console.WriteLine($"返回值：{result}");
+
             #endregion
 
             #region 代理模式
@@ -28,13 +27,13 @@ namespace AopTest
             //ProxyFactory.EnablePreInterception = true;
             //var t2 = ProxyFactory.CreateProxyInstance<TestAop2>(interception);
             //t2.Excute(); 
+
             #endregion
 
             Console.Read();
         }
-
-
     }
+
     public class TestAop : BaseAop
     {
         public bool Excute()
@@ -52,8 +51,6 @@ namespace AopTest
             //catch (Exception)
             //{
             //}
-
-
         }
     }
 

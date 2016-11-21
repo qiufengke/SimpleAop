@@ -52,7 +52,6 @@
     <Compile Include="Core\MethodInvocation.cs" />
     <Compile Include="Interface\IDynamicMethod.cs" />
     <Compile Include="Interface\IInterception.cs" />
-    <Compile Include="Interception\AopInterception.cs" />
     <Compile Include="Interface\IMethodInvocation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Proxy\AopProxy.cs" />

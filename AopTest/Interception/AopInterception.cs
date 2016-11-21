@@ -2,7 +2,7 @@
 using System.Reflection;
 using SimpleAop.Interface;
 
-namespace SimpleAop.Interception
+namespace AopTest.Interception
 {
     public class AopInterception : IInterception
     {
