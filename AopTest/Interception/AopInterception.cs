@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Reflection;
-using SimpleAop.Interface;
+using AopIntercept.Interface;
 
 namespace AopTest.Interception
 {

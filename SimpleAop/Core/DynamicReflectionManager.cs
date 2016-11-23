@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Security;
 using System.Security.Permissions;
 
-namespace SimpleAop.Core
+namespace AopIntercept.Core
 {
     [Serializable]
     internal class DynamicReflectionManager

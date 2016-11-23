@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Reflection;
-using SimpleAop.Interface;
+using AopIntercept.Interface;
 
-namespace SimpleAop.Core
+namespace AopIntercept.Core
 {
     public class SafeDynamicMethod : IDynamicMethod
     {

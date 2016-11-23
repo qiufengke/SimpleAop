@@ -5,11 +5,11 @@ using System.Runtime.Remoting.Activation;
 using System.Runtime.Remoting.Messaging;
 using System.Runtime.Remoting.Proxies;
 using System.Runtime.Remoting.Services;
-using SimpleAop.Core;
-using SimpleAop.Extension;
-using SimpleAop.Interface;
+using AopIntercept.Core;
+using AopIntercept.Extension;
+using AopIntercept.Interface;
 
-namespace SimpleAop.Proxy
+namespace AopIntercept.Proxy
 {
     /// <summary>
     /// 代理

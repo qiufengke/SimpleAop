@@ -1,7 +1,7 @@
 ﻿using System;
-using SimpleAop.Interface;
+using AopIntercept.Interface;
 
-namespace SimpleAop.Proxy
+namespace AopIntercept.Proxy
 {
     public class ProxyFactory
     {

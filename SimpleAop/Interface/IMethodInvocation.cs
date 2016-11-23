@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace SimpleAop.Interface
+namespace AopIntercept.Interface
 {
     public interface IMethodInvocation
     {

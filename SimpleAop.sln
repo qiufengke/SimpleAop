@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleAop", "SimpleAop\SimpleAop.csproj", "{9AA2DCC8-3EE1-4158-8032-9A9D600C9A33}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AopIntercept", "SimpleAop\AopIntercept.csproj", "{9AA2DCC8-3EE1-4158-8032-9A9D600C9A33}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AopTest", "AopTest\AopTest.csproj", "{E6F683B4-CEAA-4342-9B62-2ECA005927F8}"
 EndProject

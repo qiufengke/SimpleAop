@@ -1,4 +1,4 @@
-﻿namespace SimpleAop.Interface
+﻿namespace AopIntercept.Interface
 {
     public interface IDynamicMethod
     {

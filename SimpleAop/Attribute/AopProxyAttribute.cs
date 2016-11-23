@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Runtime.Remoting.Proxies;
-using SimpleAop.Interface;
-using SimpleAop.Proxy;
+using AopIntercept.Interface;
+using AopIntercept.Proxy;
 
-namespace SimpleAop.Attribute
+namespace AopIntercept.Attribute
 {
     [AttributeUsage(AttributeTargets.Class)]
     [Serializable]

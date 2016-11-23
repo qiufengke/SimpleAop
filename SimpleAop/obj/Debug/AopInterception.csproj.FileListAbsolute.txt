@@ -1,0 +1,5 @@
+C:\Users\wangs\Documents\Visual Studio 2015\Projects\SimpleAop\SimpleAop\bin\Debug\SimpleAop.dll
+C:\Users\wangs\Documents\Visual Studio 2015\Projects\SimpleAop\SimpleAop\bin\Debug\SimpleAop.pdb
+C:\Users\wangs\Documents\Visual Studio 2015\Projects\SimpleAop\SimpleAop\obj\Debug\AopInterception.csprojResolveAssemblyReference.cache
+C:\Users\wangs\Documents\Visual Studio 2015\Projects\SimpleAop\SimpleAop\obj\Debug\SimpleAop.dll
+C:\Users\wangs\Documents\Visual Studio 2015\Projects\SimpleAop\SimpleAop\obj\Debug\SimpleAop.pdb

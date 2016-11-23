@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SimpleAop.Extension
+namespace AopIntercept.Extension
 {
     public static class TypeExtension
     {

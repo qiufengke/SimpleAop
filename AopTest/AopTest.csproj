@@ -51,9 +51,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SimpleAop\SimpleAop.csproj">
+    <ProjectReference Include="..\SimpleAop\AopIntercept.csproj">
       <Project>{9aa2dcc8-3ee1-4158-8032-9a9d600c9a33}</Project>
-      <Name>SimpleAop</Name>
+      <Name>AopIntercept</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

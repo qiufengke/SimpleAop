@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Reflection;
-using SimpleAop.Interface;
+using AopIntercept.Interface;
 
-namespace SimpleAop.Core
+namespace AopIntercept.Core
 {
     [Serializable]
     public class MethodInvocation : IMethodInvocation
