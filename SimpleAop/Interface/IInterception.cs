@@ -5,6 +5,7 @@ namespace AopIntercept.Interface
 {
     public interface IInterception
     {
+        string[] InterceptMethod { get; }
         /// <summary>
         /// execute before the method invoke.
         /// </summary>

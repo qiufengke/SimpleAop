@@ -5,11 +5,18 @@ namespace AopIntercept.Proxy
 {
     public class ProxyFactory
     {
-        public static bool EnableAfterInterception = false;
-        public static bool EnablePreInterception = false;
-        public static bool EnableAroundInterception = false;
+        public bool EnableAfterInterception = false;
+        public bool EnablePreInterception = false;
+        public bool EnableAroundInterception = false;
 
-        public static T CreateProxyInstance<T>(IInterception interception) where T : new()
+        public ProxyFactory(bool enableAfter = false, bool enablePre = false, bool enableAround = false)
+        {
+            EnablePreInterception = enablePre;
+            EnableAroundInterception = enableAround;
+            EnableAfterInterception = enableAfter;
+        }
+
+        public T CreateProxyInstance<T>(IInterception interception) where T : class
         {
             var serverType = typeof(T);
             var target = Activator.CreateInstance(serverType) as MarshalByRefObject;

@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.Remoting;
 using System.Runtime.Remoting.Activation;
 using System.Runtime.Remoting.Messaging;
 using System.Runtime.Remoting.Proxies;
 using System.Runtime.Remoting.Services;
+using System.Text.RegularExpressions;
 using AopIntercept.Core;
 using AopIntercept.Extension;
 using AopIntercept.Interface;
@@ -63,26 +65,59 @@ namespace AopIntercept.Proxy
             {
                 var methodInfo = (MethodInfo)methodCallMessage.MethodBase;
 
-                if (_enablePreInterception)
-                    _interception.PreInvoke(methodInfo, methodCallMessage.Args,
-                        _target);
-
-                // 问题1：使用 methodReturnMessage = RemotingServices.ExecuteMessage(_target, methodCallMessage) 方法 不能捕获异常
-
-                Exception methodException = null;
-                methodReturnMessage = SafeExecute(methodCallMessage, ref methodException);
-
-                if (methodException != null)
+                var interceptMethods = _interception.InterceptMethod;
+                // 不进行拦截
+                if (!interceptMethods.Any(x =>
                 {
-                    _interception.ExceptionHandle(methodInfo, methodCallMessage.Args,
-                        _target, methodException);
-                }
-
-                if (_enableAfterInterception)
+                    var reg = x.Replace("*", @".*");
+                    var regx = new Regex("^" + reg + "$");
+                    return regx.IsMatch(methodInfo.Name);
+                }))
                 {
-                    _interception.AfterInvoke(methodInfo, methodCallMessage.Args,
-                        _target);
+                    try
+                    {
+                        var obj = methodInfo.Invoke(_target, methodCallMessage.Args);
+                        return new ReturnMessage(obj, null, 0, methodCallMessage.LogicalCallContext,
+                            methodCallMessage);
+                    }
+                    catch (Exception ex)
+                    {
+                        return new ReturnMessage(ex.InnerException ?? ex, methodCallMessage);
+                    }
                 }
+                methodReturnMessage = Proceed(methodInfo, methodCallMessage);
+            }
+            return methodReturnMessage;
+        }
+
+        /// <summary>
+        /// 执行具体的拦截操作
+        /// </summary>
+        /// <param name="methodInfo"></param>
+        /// <param name="methodCallMessage"></param>
+        /// <returns></returns>
+        private IMethodReturnMessage Proceed(MethodInfo methodInfo, IMethodCallMessage methodCallMessage)
+        {
+            if (_enablePreInterception)
+                _interception.PreInvoke(methodInfo, methodCallMessage.Args,
+                    _target);
+
+            // 问题1：使用 methodReturnMessage = RemotingServices.ExecuteMessage(_target, methodCallMessage) 方法 不能捕获异常
+
+            Exception methodException = null;
+
+            var methodReturnMessage = SafeExecute(methodCallMessage, ref methodException);
+
+            if (methodException != null)
+            {
+                _interception.ExceptionHandle(methodInfo, methodCallMessage.Args,
+                    _target, methodException);
+            }
+
+            if (_enableAfterInterception)
+            {
+                _interception.AfterInvoke(methodInfo, methodCallMessage.Args,
+                    _target);
             }
             return methodReturnMessage;
         }

@@ -6,6 +6,11 @@ namespace AopTest.Interception
 {
     public class AopInterception : IInterception
     {
+        public string[] InterceptMethod
+        {
+            get { return new string[] { "*Excute" }; }
+        }
+
         public void PreInvoke(MethodInfo method, object[] args, object target)
         {
             Console.ForegroundColor = ConsoleColor.Green;
@@ -20,16 +25,23 @@ namespace AopTest.Interception
 
         public object ArroundInvoke(IMethodInvocation methodInvocation)
         {
-            Console.WriteLine("ArroundInvoke 拦截器");
-            var result = methodInvocation.Proceed();
-            Console.WriteLine("ArroundInvoke 拦截器调用结束");
-            return result;
+            try
+            {
+                Console.WriteLine("ArroundInvoke 拦截器");
+                var result = methodInvocation.Proceed();
+                Console.WriteLine("ArroundInvoke 拦截器调用结束");
+                return result;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public void ExceptionHandle(MethodInfo method, object[] args, object target, Exception ex)
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($"抛出异常:{ex}");
+            Console.WriteLine($"抛出异常:\n{ex}");
             Console.ForegroundColor = ConsoleColor.White;
         }
     }
